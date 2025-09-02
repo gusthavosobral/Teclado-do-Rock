@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Teclado do Rock</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
+        
   
     body{
-        background-image: url('coraline.jpg');
+        background-image: url("l/rock.avif");
+
+        background-size: cover; 
+         background-repeat: no-repeat; 
+        background-position: center center; 
+  background-attachment: fixed; 
+  min-height: 100%; 
+  margin: 0; 
         
     }
     
     .key{
-        width: 12vw; 
+        width: 14vw; 
         padding-top: 8vw;
         display: flex inline;            
         justify-content:center;  
         align-items: center;     
-        background-color: magenta;
+        background-color:whitesmoke;
         margin-top: 20%;
         margin-left: 45px;
         border: 4px solid black;
@@ -28,23 +37,104 @@
     .keys{
         margin: 15px;
     }
-
+    header{
+    background-color: rgb(238, 234, 249);
+    color: black;
+    padding: 10px 20px; 
+    position: fixed;
+    top:0;
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    font-family:'Courier New', Courier, monospace;
     
+    }
+    .tocando{
+      color: rgb(46, 0, 0);
+      
+      transition-duration: 0.5s;
+      width:  15%;
+      background-image: url("l/fundo.webp");
+    }
 
+    kbd{
+        font-weight: bold;
+        font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
 
     </style>
 </head>
 <body>
+
+    <header>
+    <h1>Teclado do Rock</h1>
+    </header>
+
     <div class="keys">
+
     <div data-key="65" class="key">
     <kbd>A</kbd>
-    <span class="sound">clap</span>
+    <span class="sound"></span>
     </div>
-     <div data-key="64" class="key">
-    <kbd>B</kbd>
-    <span class="sound">clap</span>
+     <div data-key="83" class="key">
+    <kbd>S</kbd>
+    <span class="sound"></span>
     </div>
+    <div data-key="79" class="key">
+    <kbd>O</kbd>
+    <span class="sound"></span>
+    </div>
+    <div data-key="70" class="key">
+    <kbd>F</kbd>
+    <span class="sound"></span>
+    </div>
+    <div data-key="71" class="key">
+    <kbd>G</kbd>
+    <span class="sound"></span>
+
+    </div>
+
+   
     </div>
     
+    <audio data-key="65" src="l\Rock Instrumental.mp3"></audio>
+    <audio data-key="83" src="l\Notificação Guitarra.mp3"></audio>
+    <audio data-key="79" src="l\Piano Rock.mp3"></audio>
+    <audio data-key="70" src="l\Californication Guitarra.mp3"></audio>
+    <audio data-key="71" src="l\Rises (Huawei P30 Guitarra Despertador).mp3"></audio>
+    
+
 </body>
+
+
+<script>
+  window.addEventListener('keydown', function(e) {
+  const audios = document.querySelectorAll("audio"); 
+  
+  const todasdivs = document.querySelectorAll("div");
+  
+  for(a of todasdivs)
+  {
+    a.classList.remove("tocando");
+  }
+  
+
+  const currentAudio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const divAtivada = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+  
+  if (!currentAudio) return;
+  
+  for(a of audios)
+  {
+    a.pause();
+  }
+   
+  
+  currentAudio.currentTime=0;
+  currentAudio.play();
+  divAtivada.classList.add("tocando");
+  
+});
+</script>
 </html>
